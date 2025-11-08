@@ -16,14 +16,14 @@ const Header = () => {
     >
       <Link href="/" className="flex items-center">
         <Shield className="w-6 h-6 text-blue-600 mr-2" />
-        <h1 className="text-xl font-semibold">Expensio</h1>
+        <h1 className="text-xl font-semibold text-black">Expensio</h1>
       </Link>
 
       {/* SignIn and SignOut Components from clerk */}
       <div className="flex items-center space-x-4">
         <SignedIn>
           <Link href="/receipts">
-            <Button variant="outline">My Receipts</Button>
+            <Button variant="outline" className="text-black">My Receipts</Button>
           </Link>
 
           <Link href="/manage-plan">
