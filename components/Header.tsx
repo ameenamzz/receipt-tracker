@@ -1,11 +1,43 @@
+"use client";
 import React from "react";
 import { Button } from "./ui/button";
+import Link from "next/link";
+import { Shield } from "lucide-react";
+
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
   return (
-    <div>
-      <h1>This is Header component</h1>
-      <Button variant="outline">Submit</Button>
+    <div
+      className={`p-4 flex justify-between items-center ${isHomePage ? "bg-blue-50" : "bg-white border-blue"} `}
+    >
+      <Link href="/" className="flex items-center">
+        <Shield className="w-6 h-6 text-blue-600 mr-2" />
+        <h1 className="text-xl font-semibold">Expensio</h1>
+      </Link>
+
+      {/* SignIn and SignOut Components from clerk */}
+      <div className="flex items-center space-x-4">
+        <SignedIn>
+          <Link href="/receipts">
+            <Button variant="outline">My Receipts</Button>
+          </Link>
+
+          <Link href="/manage-plan">
+            <Button>Manage Plan</Button>
+          </Link>
+          <UserButton />
+        </SignedIn>
+
+        <SignedOut>
+          <SignInButton mode="modal">
+            <Button>Login</Button>
+          </SignInButton>
+        </SignedOut>
+      </div>
     </div>
   );
 };
